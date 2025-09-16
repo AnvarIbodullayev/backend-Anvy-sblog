@@ -1,0 +1,23 @@
+# Node.js bazasi
+FROM node:20
+
+# App working dir
+WORKDIR /app
+
+# package.json va lock fayllarini ko‘chir
+COPY package*.json ./
+
+# dependency o‘rnat
+RUN npm install
+
+# barcha fayllarni ko‘chir
+COPY . .
+
+# build (agar NestJS build qilsang)
+RUN npm run build
+
+# port och
+EXPOSE 3333
+
+# appni ishga tushir
+CMD ["npm", "run", "start:prod"]
